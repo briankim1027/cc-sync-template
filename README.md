@@ -2,6 +2,18 @@
 
 Back up and sync all your Claude Code settings (`~/.claude/`) via Git. Restore instantly on any device.
 
+![Why You Need This](docs/images/01-problem.png)
+
+![How It Works](docs/images/02-architecture.png)
+
+![What Gets Synced](docs/images/03-sync-targets.png)
+
+![Usage](docs/images/04-usage.png)
+
+![Multi-Device Sync](docs/images/05-multi-device.png)
+
+![Automation Pipeline](docs/images/06-automation.png)
+
 ## The Problem
 
 - `~/.claude/` only exists locally -- OS reinstall or disk failure = everything gone
