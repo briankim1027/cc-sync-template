@@ -16,8 +16,8 @@ claude_code_config.json
 memory/
 memory-bank-sync/
 
-# Plugin cache (large, regeneratable)
-plugins/cache/
+# Plugins (large, reinstallable via marketplace settings)
+plugins/
 
 # Rendered video output
 video/*/out/
