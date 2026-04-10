@@ -1,0 +1,8 @@
+Monitor our production API endpoint every 5 minutes and send Slack alert if it's down or responding slowly.
+
+Requirements:
+- Check https://api.example.com/health every 5 minutes
+- Alert if response time > 2 seconds or status code != 200
+- Send alert to #ops-alerts Slack channel
+- Include: endpoint URL, response time, status code, timestamp
+- Retry health check 3 times before alerting

@@ -1,0 +1,9 @@
+Sync customer data from our PostgreSQL database to Google Sheets daily for the sales team.
+
+Requirements:
+- Run every day at 9am
+- Query PostgreSQL for new customers from last 24 hours
+- Include: customer name, email, company, signup date, plan type
+- Update Google Sheets with new rows
+- Send summary email to sales@company.com
+- Handle errors gracefully with retry logic

@@ -1,0 +1,10 @@
+Send automated email to new customers when they sign up through our website form.
+
+The email should welcome them, include their account details, and provide getting started resources.
+
+Requirements:
+- Trigger: Webhook from signup form
+- Email service: Gmail
+- Include: Customer name, email, signup date
+- Send welcome email with personalized greeting
+- Log all sent emails to Google Sheets for tracking

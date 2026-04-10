@@ -1,0 +1,483 @@
+{
+  "version": "1.0",
+  "description": "Skill activation triggers for Claude Code. Controls when skills automatically suggest or block actions.",
+  "skills": {
+    "backend-patterns": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Backend architecture patterns and best practices",
+      "promptTriggers": {
+        "keywords": [
+          "backend",
+          "API",
+          "endpoint",
+          "controller",
+          "service",
+          "repository",
+          "middleware",
+          "route",
+          "express",
+          "fastapi",
+          "django",
+          "NestJS",
+          "database",
+          "ORM",
+          "prisma",
+          "REST",
+          "GraphQL"
+        ],
+        "intentPatterns": [
+          "(create|add|implement|build).*?(route|endpoint|API|controller|service|middleware)",
+          "(fix|handle|debug).*?(error|exception|backend|API)",
+          "(how to|best practice).*?(backend|route|controller|service|API)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/api/**/*.ts",
+          "**/server/**/*.ts",
+          "**/backend/**/*.ts",
+          "**/routes/**/*.ts",
+          "**/controllers/**/*.ts",
+          "**/services/**/*.ts",
+          "**/src/**/*Service.ts",
+          "**/src/**/*Controller.ts"
+        ],
+        "pathExclusions": [
+          "**/*.test.ts",
+          "**/*.spec.ts"
+        ],
+        "contentPatterns": [
+          "router\\.",
+          "app\\.(get|post|put|delete|patch)",
+          "export.*Controller",
+          "export.*Service",
+          "@Controller",
+          "@Injectable"
+        ]
+      }
+    },
+    "frontend-patterns": {
+      "type": "guardrail",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Frontend development patterns for React/Next.js/Vue",
+      "promptTriggers": {
+        "keywords": [
+          "component",
+          "react",
+          "next.js",
+          "nextjs",
+          "vue",
+          "frontend",
+          "UI",
+          "page",
+          "modal",
+          "dialog",
+          "form",
+          "styling",
+          "CSS",
+          "tailwind",
+          "MUI",
+          "shadcn"
+        ],
+        "intentPatterns": [
+          "(create|add|make|build|update).*?(component|UI|page|modal|dialog|form)",
+          "(how to|best practice).*?(component|react|frontend|UI)",
+          "(style|design|layout).*?(component|UI|page)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/components/**/*.tsx",
+          "**/pages/**/*.tsx",
+          "**/app/**/*.tsx",
+          "**/src/**/*.tsx",
+          "**/frontend/**/*.tsx",
+          "**/client/**/*.tsx"
+        ],
+        "pathExclusions": [
+          "**/*.test.tsx",
+          "**/*.spec.tsx",
+          "**/node_modules/**"
+        ],
+        "contentPatterns": [
+          "from 'react'",
+          "from 'next",
+          "useState|useEffect|useCallback",
+          "export default function.*Page",
+          "export.*Component"
+        ]
+      }
+    },
+    "coding-standards": {
+      "type": "guardrail",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Universal coding standards and conventions",
+      "promptTriggers": {
+        "keywords": [
+          "coding standard",
+          "code style",
+          "convention",
+          "naming convention",
+          "code quality",
+          "lint",
+          "format"
+        ],
+        "intentPatterns": [
+          "(what|how).*?(naming|convention|standard|style)",
+          "(review|check).*?(code quality|style|convention)"
+        ]
+      }
+    },
+    "security-review": {
+      "type": "guardrail",
+      "enforcement": "block",
+      "priority": "critical",
+      "description": "Security best practices and vulnerability prevention",
+      "promptTriggers": {
+        "keywords": [
+          "security",
+          "authentication",
+          "authorization",
+          "auth",
+          "JWT",
+          "token",
+          "password",
+          "encryption",
+          "XSS",
+          "SQL injection",
+          "CSRF",
+          "OWASP",
+          "vulnerability"
+        ],
+        "intentPatterns": [
+          "(add|implement|create).*?(auth|login|signup|security|encryption)",
+          "(review|check|audit).*?(security|vulnerability|auth)",
+          "(fix|prevent).*?(XSS|injection|CSRF|vulnerability)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/auth/**/*.ts",
+          "**/auth/**/*.tsx",
+          "**/middleware/auth*.ts",
+          "**/security/**/*.ts"
+        ],
+        "contentPatterns": [
+          "bcrypt|argon2",
+          "jwt\\.sign|jwt\\.verify",
+          "createCipheriv|createHash",
+          "sanitize|escape|validate"
+        ]
+      },
+      "blockMessage": "BLOCKED - Security Review Required\n\nREQUIRED ACTION:\n1. Use Skill tool: 'security-review'\n2. Review OWASP top 10 patterns\n3. Then retry this edit\n\nReason: Security-critical code detected"
+    },
+    "tdd-workflow": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Test-Driven Development workflow and patterns",
+      "promptTriggers": {
+        "keywords": [
+          "test",
+          "TDD",
+          "unit test",
+          "integration test",
+          "e2e test",
+          "testing",
+          "jest",
+          "vitest",
+          "pytest",
+          "coverage",
+          "mock"
+        ],
+        "intentPatterns": [
+          "(write|add|create|implement).*?(test|spec|coverage)",
+          "(how to|best practice).*?(test|TDD|mock|coverage)",
+          "(fix|debug).*?test"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/test_*.py",
+          "**/*_test.py",
+          "**/__tests__/**"
+        ],
+        "contentPatterns": [
+          "describe\\(",
+          "it\\(",
+          "test\\(",
+          "expect\\(",
+          "jest\\.mock",
+          "vi\\.mock"
+        ]
+      }
+    },
+    "tasks-generator": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Task generation and project planning with TDD workflow",
+      "promptTriggers": {
+        "keywords": [
+          "task list",
+          "todo",
+          "project plan",
+          "implementation plan",
+          "worktree",
+          "git worktree"
+        ],
+        "intentPatterns": [
+          "(create|generate|plan).*?(task|todo|plan|backlog)",
+          "(break down|decompose).*?(feature|story|requirement)"
+        ]
+      }
+    },
+    "deep-research": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Deep research using multiple search APIs in parallel",
+      "promptTriggers": {
+        "keywords": [
+          "research",
+          "deep search",
+          "investigate",
+          "compare",
+          "analysis",
+          "benchmark"
+        ],
+        "intentPatterns": [
+          "(research|investigate|compare|analyze).*?(library|framework|tool|approach|pattern)",
+          "(what is|how does|explain).*?(work|compare|differ)"
+        ]
+      }
+    },
+    "git-master": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Git operations, atomic commits, and history management",
+      "promptTriggers": {
+        "keywords": [
+          "commit",
+          "git",
+          "branch",
+          "merge",
+          "rebase",
+          "cherry-pick",
+          "stash",
+          "tag",
+          "release"
+        ],
+        "intentPatterns": [
+          "(create|make|do).*?(commit|branch|tag|release)",
+          "(merge|rebase|squash).*?(branch|commit)",
+          "(fix|undo|revert).*?(commit|merge|push)"
+        ]
+      }
+    },
+    "socrates": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Socratic 1:1 planning mentor for vibe coders",
+      "promptTriggers": {
+        "keywords": [
+          "plan together",
+          "help me think",
+          "brainstorm",
+          "mentor",
+          "guide me"
+        ],
+        "intentPatterns": [
+          "(help me|guide me|teach me).*?(plan|think|design|decide)",
+          "(what should|how should).*?(approach|start|design|build)"
+        ]
+      }
+    },
+    "vercel-react-best-practices": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "React and Next.js performance optimization with Vercel",
+      "promptTriggers": {
+        "keywords": [
+          "vercel",
+          "next.js",
+          "nextjs",
+          "SSR",
+          "SSG",
+          "ISR",
+          "server component",
+          "app router",
+          "server action"
+        ],
+        "intentPatterns": [
+          "(deploy|optimize|configure).*?(vercel|next\\.js|nextjs)",
+          "(how to|best practice).*?(server component|SSR|SSG|ISR)",
+          "(create|build).*?(next\\.js|nextjs).*?(app|project|page)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/app/**/page.tsx",
+          "**/app/**/layout.tsx",
+          "**/app/**/loading.tsx",
+          "**/app/**/error.tsx",
+          "next.config.*"
+        ],
+        "contentPatterns": [
+          "'use server'",
+          "'use client'",
+          "from 'next/"
+        ]
+      }
+    },
+    "mcp-builder": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Guide for creating MCP servers",
+      "promptTriggers": {
+        "keywords": [
+          "MCP server",
+          "MCP tool",
+          "model context protocol",
+          "create MCP",
+          "build MCP"
+        ],
+        "intentPatterns": [
+          "(create|build|implement).*?MCP.*?(server|tool)",
+          "(how to|guide).*?MCP"
+        ]
+      }
+    },
+    "project-bootstrap": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Project initialization with AI agent team structure",
+      "promptTriggers": {
+        "keywords": [
+          "new project",
+          "project setup",
+          "bootstrap",
+          "initialize",
+          "scaffold",
+          "starter",
+          "boilerplate"
+        ],
+        "intentPatterns": [
+          "(create|start|init|setup|bootstrap).*?(project|app|application)",
+          "(new|fresh).*?(project|app|codebase)"
+        ]
+      }
+    },
+    "skill-creator": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Meta-skill for creating and managing Claude Code skills",
+      "promptTriggers": {
+        "keywords": [
+          "create skill",
+          "add skill",
+          "skill system",
+          "skill triggers",
+          "skill rules",
+          "skill development"
+        ],
+        "intentPatterns": [
+          "(create|add|modify|build).*?skill",
+          "skill.*?(work|trigger|activate|system)",
+          "(how do|how does|explain).*?skill"
+        ]
+      }
+    },
+    "ultrawork": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Maximum parallelism execution mode",
+      "promptTriggers": {
+        "keywords": [
+          "ultrawork",
+          "parallel",
+          "fast mode",
+          "maximum speed"
+        ],
+        "intentPatterns": [
+          "(activate|start|enable).*?(ultrawork|parallel|fast)",
+          "(work|do|execute).*?(parallel|fast|maximum)"
+        ]
+      }
+    },
+    "frontend-ui-ux": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Designer-developer for stunning UI/UX",
+      "promptTriggers": {
+        "keywords": [
+          "UI design",
+          "UX",
+          "user interface",
+          "user experience",
+          "responsive",
+          "animation",
+          "transition",
+          "accessibility",
+          "a11y"
+        ],
+        "intentPatterns": [
+          "(design|improve|create).*?(UI|UX|interface|experience)",
+          "(make|add).*?(beautiful|stunning|modern|responsive|animated)",
+          "(improve|fix).*?(accessibility|a11y|usability)"
+        ]
+      }
+    },
+    "workflow_n8n_architect": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "n8n workflow architecture and design",
+      "promptTriggers": {
+        "keywords": [
+          "n8n",
+          "workflow automation",
+          "workflow design"
+        ],
+        "intentPatterns": [
+          "(create|design|build).*?(n8n|workflow|automation)",
+          "n8n.*?(workflow|node|trigger)"
+        ]
+      }
+    }
+  },
+  "notes": {
+    "enforcement_types": {
+      "suggest": "Skill suggestion appears but doesn't block execution",
+      "block": "Requires skill to be used before proceeding (guardrail)",
+      "warn": "Shows warning but allows proceeding"
+    },
+    "priority_levels": {
+      "critical": "Highest - Always trigger when matched",
+      "high": "Important - Trigger for most matches",
+      "medium": "Moderate - Trigger for clear matches",
+      "low": "Optional - Trigger only for explicit matches"
+    },
+    "customization": {
+      "pathPatterns": "Adjust to match your project structure",
+      "keywords": "Add domain-specific terms relevant to your project",
+      "intentPatterns": "Use regex for flexible user intent matching"
+    }
+  }
+}

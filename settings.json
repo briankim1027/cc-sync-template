@@ -1,0 +1,357 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/c/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/c/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/c/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node C:/Users/c/.claude/hud/omc-hud.mjs"
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": true,
+    "git-workflow@claude-code-templates": true,
+    "testing-suite@claude-code-templates": true,
+    "ai-ml-toolkit@claude-code-templates": true,
+    "supabase-toolkit@claude-code-templates": true,
+    "nextjs-vercel-pro@claude-code-templates": true,
+    "performance-optimizer@claude-code-templates": true,
+    "python-development@claude-code-workflows": true,
+    "javascript-typescript@claude-code-workflows": true,
+    "backend-development@claude-code-workflows": true,
+    "security-scanning@claude-code-workflows": true,
+    "code-review-ai@claude-code-workflows": true,
+    "full-stack-orchestration@claude-code-workflows": true,
+    "claude-mem@thedotmack": false,
+    "agent-orchestration@claude-code-workflows": true,
+    "consultant@nicknisi": true,
+    "content@nicknisi": true,
+    "developer-experience@nicknisi": true,
+    "essentials@nicknisi": true,
+    "ideation@nicknisi": true,
+    "sandbox@nicknisi": true,
+    "spec-driven@nicknisi": true,
+    "workos@nicknisi": true,
+    "reflect@open-claude-plugins": true,
+    "ralph-wiggum@claude-plugins-official": true,
+    "oh-my-claude-sisyphus@oh-my-claude-sisyphus": true,
+    "claude-delegator@jarrodwatts-claude-delegator": true,
+    "code-simplifier@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "bkit@bkit-marketplace": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "astory-blog-writers@moai-cc-plugins": true,
+    "moai-platform-appintoss@moai-cc-plugins": true,
+    "claude-dashboard@claude-dashboard": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "oh-my-claudecode@oh-my-claude-sisyphus": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "docs-guide@gptaku-plugins": true,
+    "show-me-the-prd@gptaku-plugins": true,
+    "vibe-sunsang@gptaku-plugins": true,
+    "pumasi@gptaku-plugins": true,
+    "context-mode@context-mode": true,
+    "telegram@claude-plugins-official": true,
+    "last30days@last30days-skill": true,
+    "second-claude-code@second-claude-code": true
+  },
+  "extraKnownMarketplaces": {
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    },
+    "last30days-skill": {
+      "source": {
+        "source": "github",
+        "repo": "mvanhorn/last30days-skill"
+      }
+    },
+    "second-claude-code": {
+      "source": {
+        "source": "github",
+        "repo": "unclejobs-ai/second-claude-code"
+      }
+    }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ]
+    },
+    "context7-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
+    "codex": {
+      "type": "stdio",
+      "command": "codex",
+      "args": [
+        "-m",
+        "gpt-5.2-codex",
+        "mcp-server"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ]
+    },
+    "convex": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "convex@latest",
+        "mcp",
+        "start"
+      ]
+    },
+    "gemini": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "gemini-nanobanana-mcp@latest"
+      ]
+    },
+    "mcp-server-firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "5",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "2000",
+        "FIRECRAWL_RETRY_MAX_DELAY": "30000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "3",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "2000",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "500"
+      }
+    },
+    "slack": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-slack"
+      ],
+      "env": {
+        "SLACK_CHANNEL_IDS": "C01234567, C76543210"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
+    },
+    "notion": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@suekou/mcp-notion-server"
+      ]
+    },
+    "tavily-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.1.4"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ]
+    },
+    "mcp-youtube": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anaisbetts/mcp-youtube"
+      ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--stdio"
+      ]
+    },
+    "everart": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everart"
+      ]
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@0.3.5"
+      ]
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "c:\\"
+      ]
+    },
+    "taskmaster-ai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=task-master-ai",
+        "task-master-ai"
+      ]
+    },
+    "magic": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest"
+      ]
+    },
+    "shrimp-task-manager": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-shrimp-task-manager"
+      ],
+      "env": {
+        "DATA_DIR": "/mcp-shrimp-task-manager/data",
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    },
+    "apify": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.apify.com/?tools=actors,docs,apify/rag-web-browser"
+      ]
+    },
+    "elevenlabs": {
+      "command": "uvx",
+      "args": [
+        "elevenlabs-mcp"
+      ]
+    },
+    "hyperbrowser": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "hyperbrowser-mcp"
+      ]
+    },
+    "TestSprite": {
+      "command": "npx",
+      "args": [
+        "@testsprite/testsprite-mcp@latest"
+      ]
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "exa-mcp-server"
+      ]
+    },
+    "stitch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "stitch-mcp-auto"
+      ]
+    }
+  },
+  "disabledMcpServers": [
+    "slack",
+    "notion",
+    "figma",
+    "everart",
+    "elevenlabs",
+    "hyperbrowser",
+    "puppeteer",
+    "apify",
+    "mcp-youtube",
+    "supabase",
+    "memory",
+    "filesystem",
+    "shrimp-task-manager",
+    "taskmaster-ai",
+    "magic",
+    "TestSprite",
+    "exa",
+    "stitch",
+    "tavily-mcp",
+    "brave-search"
+  ]
+}

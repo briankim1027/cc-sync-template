@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@opencode-ai/plugin": "1.2.10",
+    "opencode-anthropic-auth": "^0.0.7"
+  }
+}
